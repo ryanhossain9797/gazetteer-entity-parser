@@ -8,7 +8,6 @@ use failure::{format_err, ResultExt};
 use fnv::{FnvHashMap, FnvHashSet};
 use rmp_serde::{from_read, Serializer};
 use serde::{Deserialize, Serialize};
-use serde_json;
 use std::cmp::Ordering;
 use std::collections::hash_map::Entry;
 use std::collections::{BinaryHeap, HashSet};
@@ -633,11 +632,10 @@ mod tests {
     fn get_license_info() -> LicenseInfo {
         let license_content = "Some content here".to_string();
         let license_filename = "LICENSE".to_string();
-        let license_info = LicenseInfo {
+        LicenseInfo {
             filename: license_filename,
             content: license_content,
-        };
-        license_info
+        }
     }
 
     #[test]

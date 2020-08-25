@@ -59,7 +59,7 @@ impl ParserRegistry {
                     .push(token_idx);
             }
         }
-        return Some(res_value_idx);
+        Some(res_value_idx)
     }
 
     /// Prepends a list of entity values to the parser and update the ranks accordingly.
@@ -73,7 +73,7 @@ impl ParserRegistry {
         let res_values_indices = entity_values
             .into_iter()
             .enumerate()
-            .flat_map(|(rank, entity_value)| self.add_value(entity_value.clone(), rank as Rank))
+            .flat_map(|(rank, entity_value)| self.add_value(entity_value, rank as Rank))
             .collect();
 
         // Update the stop words and edge cases
@@ -131,7 +131,7 @@ impl ParserRegistry {
                     })
                     .collect()
             })
-            .unwrap_or_else(|| vec![]);
+            .unwrap_or_else(Vec::new);
 
         self.set_top_stop_words(n_stop_words);
     }
@@ -233,7 +233,7 @@ impl ParserRegistry {
         let additional_stop_words = self.get_additional_stop_words();
         let mut registry = ParserRegistry::default();
         if !from_vanilla {
-            registry.injected_values = self.injected_values.clone();
+            registry.injected_values = self.injected_values;
         };
         for (rank, entity_value) in gazetteer.into_iter().enumerate() {
             let is_injected = entity_value.is_injected;

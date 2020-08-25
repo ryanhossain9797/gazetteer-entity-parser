@@ -105,7 +105,6 @@ impl ParserBuilder {
 mod tests {
     use super::*;
     use crate::data::EntityValue;
-    use serde_json;
 
     fn get_license_info() -> LicenseInfo {
         let license_content = "Some content here".to_string();
